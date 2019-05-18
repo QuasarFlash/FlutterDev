@@ -8,7 +8,7 @@ class NewsApiProvider implements Source {
   final _url = "https://hacker-news.firebaseio.com/v0";
 
   Future<List<int>> fetchTopIds() async {
-    final idUrl = "$_url/maxitem.json";
+    final idUrl = "$_url/topstories.json";
     final response = await client.get(idUrl);
     final ids = json.decode(response.body);
 
