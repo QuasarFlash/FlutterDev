@@ -15,12 +15,17 @@ class NewsList extends StatelessWidget {
 
   Widget buildList() {
     return ListView.builder(
-        itemCount: 1000,
+        itemCount: 10000,
         itemBuilder: (context, int index) {
           return FutureBuilder(
             future: getFuture(),
             builder: (context, snapshot) {
-              return snapshot.hasData ? Text('Im here $index'): Text('Not here');
+              return Container(
+                height: 80.0,
+                child: snapshot.hasData
+                    ? Text('Im here $index')
+                    : Text('Not here'),
+              );
             },
           );
         });
