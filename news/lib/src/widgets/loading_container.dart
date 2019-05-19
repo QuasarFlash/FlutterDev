@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 
 
 class LoadingContainer extends StatelessWidget {
-  const LoadingContainer({Key key}) : super(key: key);
+  final bool trail;
+  const LoadingContainer({Key key, this.trail=true}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -11,7 +12,7 @@ class LoadingContainer extends StatelessWidget {
         ListTile(
           title: buildContainer(),
           subtitle: buildContainer(),
-          trailing: buildContainer(ht: 20.0, wt: 20.0),
+          trailing: this.trail ? buildContainer(ht: 20.0, wt: 20.0) : null,
         ),
         Divider(
           height: 8.0,

@@ -13,8 +13,8 @@ class Repository {
   List<Cache> caches = <Cache>[
     newsDbProvider,
   ];
-  NewsDbProvider dbProvider = NewsDbProvider();
-  NewsApiProvider apiProvider = NewsApiProvider();
+  // NewsDbProvider dbProvider = NewsDbProvider();
+  // NewsApiProvider apiProvider = NewsApiProvider();
 
   Future<List<int>> fetchTopIds() {
     return sources[1].fetchTopIds();

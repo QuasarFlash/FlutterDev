@@ -4,7 +4,7 @@ import '../resources/repository.dart';
 import 'dart:async';
 
 class CommentsBloc {
-  final _respository = Repository();
+  final _repository = Repository();
   final _commentsFetcher = PublishSubject<int>();
   final _commentsOutput = BehaviorSubject<Map<int, Future<ItemModel>>>();
 
@@ -17,14 +17,14 @@ class CommentsBloc {
 
   CommentsBloc() {
     _commentsFetcher.stream
-        .transform(_commentsTranformer())
+        .transform(_commentsTransformer())
         .pipe(_commentsOutput);
   }
 
-  _commentsTranformer() {
+  _commentsTransformer() {
     return ScanStreamTransformer<int, Map<int, Future<ItemModel>>>(
       (cache, int id, index) {
-        cache[id] = _respository.fetchItem(id);
+        cache[id] = _repository.fetchItem(id);
         cache[id].then((ItemModel item) {
           item.kids.forEach((kidId) => fetchItemWithComments(kidId));
         });

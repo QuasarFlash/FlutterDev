@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../blocs/stores_provider.dart';
+import '../blocs/stories_provider.dart';
 
 class Refresh extends StatelessWidget {
   final Widget child;

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'loading_container.dart';
 import '../models/item_model.dart';
-import '../blocs/stores_provider.dart';
+import '../blocs/stories_provider.dart';
 import 'dart:async';
 
 class NewsListTile extends StatelessWidget {

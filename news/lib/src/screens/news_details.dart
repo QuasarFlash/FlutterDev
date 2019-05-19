@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../blocs/comments_provider.dart';
 import '../models/item_model.dart';
 import 'dart:async';
+import '../widgets/comment.dart';
 
 class NewsDetail extends StatelessWidget {
   final int itemId;
@@ -33,23 +34,23 @@ class NewsDetail extends StatelessWidget {
             if (!itemSnapshot.hasData) {
               return buildLoading();
             }
-            return buildTitle(itemSnapshot.data);
+            return buildStory(itemSnapshot.data, snapshot.data);
           },
         );
       },
     );
   }
 
-  Widget buildTitle(ItemModel item) {
+  Widget buildStory(ItemModel item, Map<int, Future<ItemModel>> itemMap) {
     return Scaffold(
       appBar: AppBar(
         title: Text('${item.title}'),
       ),
-      body: buildStoryBody(item),
+      body: buildStoryBody(item, itemMap),
     );
   }
 
-  Widget buildStoryBody(ItemModel item) {
+  Widget buildTitle(ItemModel item) {
     return Container(
       alignment: Alignment.topCenter,
       margin: EdgeInsets.all(10.0),
@@ -57,20 +58,37 @@ class NewsDetail extends StatelessWidget {
         item.title,
         textAlign: TextAlign.center,
         style: TextStyle(
-          fontSize:  20.0,
+          fontSize: 20.0,
           fontWeight: FontWeight.bold,
         ),
       ),
     );
   }
-  Widget buildLoading(){
+
+  Widget buildStoryBody(ItemModel item, Map<int, Future<ItemModel>> itemMap) {
+    final children = <Widget>[];
+    children.add(buildTitle(item));
+    final commentsList = item.kids.map((commentId) {
+      return Comment(
+        itemId: commentId,
+        itemMap: itemMap,
+        depth: 0,
+      );
+    }).toList();
+    children.addAll(commentsList);
+
+    return ListView(
+      children: children,
+    );
+  }
+
+  Widget buildLoading() {
     return Scaffold(
       appBar: AppBar(
         title: Text('Loading Story'),
       ),
-      body:  Container(
-        alignment: Alignment.center,
-        child: CircularProgressIndicator()),
+      body: Container(
+          alignment: Alignment.center, child: CircularProgressIndicator()),
     );
   }
 }

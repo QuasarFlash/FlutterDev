@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'screens/news_list.dart';
-import 'blocs/stores_provider.dart';
+import 'blocs/stories_provider.dart';
 import 'screens/news_details.dart';
 import 'blocs/comments_provider.dart';
 
@@ -11,8 +11,9 @@ class App extends StatelessWidget {
       child: StoriesProvider(
         child: MaterialApp(
           title: "Flutter News",
-          home: NewsList(),
+          // home: NewsList(),
           onGenerateRoute: routes,
+          debugShowCheckedModeBanner: false,
         ),
       ),
     );
@@ -20,9 +21,13 @@ class App extends StatelessWidget {
 
   Route routes(RouteSettings settings) {
     if (settings.name == '/') {
-      return MaterialPageRoute(builder: (context) {
-        return NewsList();
-      });
+      return MaterialPageRoute(
+        builder: (context) {
+          final storiesBloc = StoriesProvider.of(context);
+          storiesBloc.fetchTopIds();
+          return NewsList();
+        },
+      );
     } else {
       return MaterialPageRoute(
         builder: (context) {

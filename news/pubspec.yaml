@@ -1,5 +1,5 @@
-name: news
-description: A new Flutter project.
+name: Flutter_HackerNews
+description: A Flutter project using HackerNews API, tutorial from Steven Grinder.
 
 # The following defines the version and build number for your application.
 # A version number is three numbers separated by dots, like 1.2.43
@@ -28,6 +28,7 @@ dependencies:
   sqflite: any
   http: any
   rxdart: any
+  flutter_html: any
 dev_dependencies:
   flutter_test:
     sdk: flutter
