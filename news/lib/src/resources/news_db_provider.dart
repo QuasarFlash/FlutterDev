@@ -29,9 +29,10 @@ class NewsDbProvider implements Source, Cache {
           CREATE TABLE Items
             (
               id INTEGER PRIMARY KEY,
-              TYPE TEXT,
+              type TEXT,
               by TEXT,
-              time TEXT,
+              time INTEGER,
+              text TEXT,
               parent INTEGER,
               kids BLOB,
               dead INTEGER,
