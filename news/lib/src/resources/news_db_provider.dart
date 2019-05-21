@@ -26,7 +26,7 @@ class NewsDbProvider implements Source, Cache {
       version: 1,
       onCreate: (Database newDb, int version) {
         newDb.execute("""
-          CREATE TABLE Items
+          CREATE TABLE IF NOT EXISTS Items
             (
               id INTEGER PRIMARY KEY,
               type TEXT,

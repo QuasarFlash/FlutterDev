@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../models/item_model.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'loading_container.dart';
+import 'news_webview.dart';
 
 class Comment extends StatelessWidget {
   final int itemId;
@@ -16,7 +17,9 @@ class Comment extends StatelessWidget {
       future: itemMap[itemId],
       builder: (context, AsyncSnapshot<ItemModel> snapshot) {
         if (!snapshot.hasData) {
-          return LoadingContainer(trail: false,);
+          return LoadingContainer(
+            trail: false,
+          );
         }
 
         final item = snapshot.data;
@@ -27,9 +30,20 @@ class Comment extends StatelessWidget {
                 : Html(
                     data: (item.text),
                     onLinkTap: (url) {
-                      print(url);
-                    },
-                  ),
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => Scaffold(
+                                appBar: AppBar(
+                                  title: Text("Webview"),
+                                ),
+                                body: NewsWebView(
+                                  newsUrl: url,
+                                ),
+                              ),
+                        ),
+                      );
+                    }),
             subtitle: item.by == "" ? Text('Deleted') : Text(item.by),
             contentPadding: EdgeInsets.only(
               right: 16.0,
@@ -58,9 +72,9 @@ class Comment extends StatelessWidget {
 
   Widget buildText(ItemModel item) {
     final text = item.text
-    .replaceAll('&#x27', "'")
-    .replaceAll('<p>', '\n\n')
-    .replaceAll('<>/p', '');
+        .replaceAll('&#x27', "'")
+        .replaceAll('<p>', '\n\n')
+        .replaceAll('<>/p', '');
     return Text(text);
   }
 }

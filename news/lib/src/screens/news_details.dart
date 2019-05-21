@@ -3,6 +3,7 @@ import '../blocs/comments_provider.dart';
 import '../models/item_model.dart';
 import 'dart:async';
 import '../widgets/comment.dart';
+import '../widgets/news_webview.dart';
 
 class NewsDetail extends StatelessWidget {
   final int itemId;
@@ -54,13 +55,30 @@ class NewsDetail extends StatelessWidget {
     return Container(
       alignment: Alignment.topCenter,
       margin: EdgeInsets.all(10.0),
-      child: Text(
-        item.title,
-        textAlign: TextAlign.center,
-        style: TextStyle(
-          fontSize: 20.0,
-          fontWeight: FontWeight.bold,
+      child: ExpansionTile(
+        key: Key(item.title),
+        title: Text(
+          item.title,
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            fontSize: 20.0,
+            fontWeight: FontWeight.bold,
+          ),
         ),
+        children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 2.0),
+            child:
+                Column(
+              children: <Widget>[
+                NewsWebView(
+                  newsUrl: item.url,
+                  height: 300,
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }

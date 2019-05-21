@@ -16,7 +16,7 @@ class ItemModel {
   final int descendants;
 
   ItemModel.fromJson(Map<String, dynamic> parsedJson)
-      : id = parsedJson['id'] ?? '',
+      : id = parsedJson['id'],
         deleted = parsedJson['deleted'] ?? false,
         type = parsedJson['type'] ?? '',
         by = parsedJson['by'] ?? '',
