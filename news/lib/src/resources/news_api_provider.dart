@@ -19,7 +19,6 @@ class NewsApiProvider implements Source {
     final itemUrl = "$_url/item/$id.json";
     final response = await client.get(itemUrl);
     final parsedJson = json.decode(response.body);
-
     return ItemModel.fromJson(parsedJson);
   }
 }

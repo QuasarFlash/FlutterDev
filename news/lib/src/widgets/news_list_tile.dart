@@ -1,8 +1,8 @@
+import 'news_webview.dart';
 import 'package:flutter/material.dart';
 import 'loading_container.dart';
 import '../models/item_model.dart';
 import '../blocs/stories_provider.dart';
-import 'package:webview_flutter/webview_flutter.dart';
 import 'dart:async';
 
 class NewsListTile extends StatelessWidget {
@@ -36,7 +36,22 @@ class NewsListTile extends StatelessWidget {
     return Column(
       children: <Widget>[
         ListTile(
-          onTap: (){
+          onLongPress: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => Scaffold(
+                          appBar: AppBar(
+                            title: Text("Story Webview"),
+                          ),
+                          body: NewsWebView(
+                            newsUrl: item.url,
+                          ),
+                        ),
+                  ),
+                );
+              },
+          onTap: () {
             Navigator.pushNamed(context, '/${item.id}');
           },
           title: Text(item.title),

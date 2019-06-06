@@ -17,16 +17,16 @@ class Repository {
   // NewsApiProvider apiProvider = NewsApiProvider();
 
   Future<List<int>> fetchTopIds() {
-    return sources[1].fetchTopIds();
-    // Future<List<int>> topIds;
-    // Source source;
-    // for (source in sources){
-    //   topIds = source.fetchTopIds();
-    //   if (topIds != null){
-    //     break;
-    //   }
-    // }
-    // return topIds;
+    // return sources[1].fetchTopIds();
+    Future<List<int>> topIds;
+    Source source;
+    for (source in sources){
+      topIds = source.fetchTopIds();
+      if (topIds != null){
+        break;
+      }
+    }
+    return topIds;
   }
 
   Future<ItemModel> fetchItem(int id) async {
